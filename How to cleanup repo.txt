@@ -46,3 +46,8 @@ find . -type d -iname "node_modules"
 ```
 
 Delete these using `git rm --cached path/to/dir`
+
+
+## Comments & discussion items
+- What's node-authorization-middlware directory being used for in module-5?
+- What's nextjs-dashboard directory being used for in module-7?

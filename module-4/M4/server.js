@@ -1,3 +1,5 @@
+
+// FIXME: Remove unused imports
 import http from 'http';
 import fs from 'fs';
 // import _ from 'lodash';
@@ -26,6 +28,8 @@ app.use((req, res, next) => {
 app.listen(3000, 'localhost', () =>{
     console.log('listening for requests on port 3000');
 });
+
+// FIXME: Remove hardcoded API keys and DB URIs, replace with environment variables
 
 // UC0tdVisA3LkRhml  yimingxu96
 // mongodb+srv://yimingxu96:UC0tdVisA3LkRhml@m4.sdxiz04.mongodb.net/

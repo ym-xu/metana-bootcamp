@@ -1,3 +1,5 @@
+// FIXME: Clean up commented code blocks
+
 // import logo from './logo.svg';
 // import './App.css';
 

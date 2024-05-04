@@ -1,4 +1,5 @@
 
+// FIXME: Remove unused imports
 import http from 'http';
 import fs from 'fs';
 import express from 'express';
@@ -7,6 +8,8 @@ import usersRouter from './routes/usersRouter.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// FIXME: Remove hardcoded API keys and DB URIs, replace with environment variables
 const dbURI = 'mongodb+srv://yimingxu96:UC0tdVisA3LkRhml@m4.sdxiz04.mongodb.net/m4-assignment?retryWrites=true&w=majority&appName=M4'
 
 // Connect to MongoDB
