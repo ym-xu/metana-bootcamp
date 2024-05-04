@@ -1,0 +1,34 @@
+<!-- Import Module from HTML:
+Add a script tag to import variables from user-details.js.
+Write a function to print user details to the console.
+Implement the function on a button press. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+
+<head>
+</head>
+
+<body>
+    <script type="module">
+    import {user} from './user-details.js';
+    import {printUser} from './message.js';
+
+    function printUserDetails() {
+        console.log("Name: ", user.name);
+        console.log("Age: ", user.age);
+        console.log("City: ", user.city);
+    }
+
+    document.getElementById('displayUserDetailsBtn').addEventListener('click', printUserDetails);
+    document.getElementById('printUserBtn').addEventListener('click', printUser);
+
+    </script>
+
+    <button id="displayUserDetailsBtn">Print User</button>
+    <button id="printUserBtn">Print User 2</button>
+
+</body>
+
+</html>
