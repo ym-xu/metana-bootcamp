@@ -1,0 +1,14 @@
+Some notes from cleaning up the repository
+
+1. Gitignore -- Make sure gitignore ignores `node_modules` directories.
+
+2. Readme -- fill out the repository's README file
+
+3. Branches - Modules should each be added in a new branch. We can make branches and added these one at a time to `main` with PRs -- can do code review for each module individually in separate PRs.
+
+4. Remove node packages -- We don't want node packages included in our Git history. Since they're already there, we need to remove them from git tracking, without deleting the files. The command for this is `git rm --cached -- [somedir/some-subdir/*]`
+
+5. Backup -- Create a branch from `module-2` called `backup-modules-2-7`. Push this to Github and confirm it exists. This will be a our backup in case we accidentally delete something while cleaning up our branches.
+
+
+6. Code cleanup -- Look for things that shouldn't be there, like commented code blocks, database credentials and API keys, etc. We don't want these in our Git history, because they can be seen by the public.
