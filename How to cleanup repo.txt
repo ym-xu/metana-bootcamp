@@ -6,7 +6,7 @@ Some notes from cleaning up the repository
 
 3. Branches - Modules should each be added in a new branch. We can make branches and added these one at a time to `main` with PRs -- can do code review for each module individually in separate PRs.
 
-4. Remove node packages -- We don't want node packages included in our Git history. Since they're already there, we need to remove them from git tracking, without deleting the files. The command for this is `git rm --cached -- [somedir/some-subdir/*]`
+4. Remove node packages -- We don't want node packages included in our Git history. Since they're already there, we need to remove them from git tracking, without deleting the files. The command for this is `git rm -r --cached -- [somedir/some-subdir/*]`
 
 5. Backup -- Create a branch from `module-2` called `backup-modules-2-7`. Push this to Github and confirm it exists. This will be a our backup in case we accidentally delete something while cleaning up our branches.
 
@@ -45,7 +45,7 @@ find . -type d -iname "node_modules"
 ./module-4/M4/node_modules/finalhandler/node_modules
 ```
 
-Delete these using `git rm --cached path/to/dir`
+Delete these using `git rm -r --cached path/to/dir`
 
 
 ## Comments & discussion items
