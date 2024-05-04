@@ -10,8 +10,11 @@ Some notes from cleaning up the repository
 
 5. Backup -- Create a branch from `module-2` called `backup-modules-2-7`. Push this to Github and confirm it exists. This will be a our backup in case we accidentally delete something while cleaning up our branches.
 
+6. Code cleanup -- Look for things that shouldn't be there, like commented code blocks
 
-6. Code cleanup -- Look for things that shouldn't be there, like commented code blocks, database credentials and API keys, etc. We don't want these in our Git history, because they can be seen by the public.
+7. Sanitize -- Look through our code for database credentials and API keys, etc, and remove them. We don't want these in our Git history, because they can be seen by the public.
+
+8. Merge PRs -- We will go through PRs one at a time, and merge them with main after review.
 
 
 ---- 
