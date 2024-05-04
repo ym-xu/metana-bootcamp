@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics</title>
+    <script src="funcs.js" defer></script>
+    <script>
+        // Define a simple function inside the <script> tag
+        function functionFromScriptTag() {
+            console.log("Function from script tag called");
+        }
+
+        // Add an onload function
+        function onPageLoad() {
+            alert("Page loaded!");
+        }
+
+        // Inline function
+        function inlineFunction() {
+            console.log("Inline function called");
+        }
+
+        // Function to read form value
+        function readFormValue() {
+            var inputValue = document.getElementById('inputField').value;
+            console.log("Form value:", inputValue);
+        }
+    </script>
+</head>
+<body onload="onPageLoad()">
+    <!-- Run function from script tag -->
+    <div>
+        <h3>Run function from script tag</h3>
+        <button onclick="functionFromScriptTag()">Run Function</button>
+    </div>
+
+    <!-- Inline function -->
+    <div>
+        <h3>Inline function</h3>
+        <button onclick="inlineFunction()">Run Inline Function</button>
+    </div>
+
+    <!-- Run imported functions -->
+    <div>
+        <h3>Run imported functions</h3>
+        <button onclick="formSubmitted()">Run Imported Function</button>
+    </div>
+
+    <!-- Form submit actions -->
+    <div>
+        <h3>Form submit actions</h3>
+        <form action="#" onsubmit="formSubmitted()">
+            <input type="submit" value="Submit Form">
+        </form>
+    </div>
+
+    <!-- Reading form values -->
+    <div>
+        <h3>Reading form values</h3>
+        <form onsubmit="readFormValue()">
+            <input type="text" id="inputField" name="inputField" placeholder="Enter value">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <!-- Extra credit tasks -->
+    <div>
+        <h3>Extra credit tasks</h3>
+        <button onclick="document.getElementById('colorDiv').style.backgroundColor = 'yellow'">Change Color</button>
+    </div>
+
+    <!-- Element for changing color -->
+    <div id="colorDiv" style="width: 100px; height: 100px; border: 1px solid black;"></div>
+
+    <!-- Element to hide -->
+    <div>
+        <h3>Extra credit hide Paragraph</h3>
+        <button onclick="document.getElementById('hideParagraph').style.display = 'none'">Hide Element</button>
+    </div>
+    <p id="hideParagraph">This is a paragraph</p>
+
+    <div>
+        <h3>Extra credit change Text</h3>
+        <button onclick="document.getElementById('changeText').innerText = 'Text Changed'">Change Text</button>
+        <label id="changeText">Original Text</label>
+    </div>
+    
+</body>
+</html>
