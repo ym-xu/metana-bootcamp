@@ -1,0 +1,100 @@
+
+body {
+  color: darkgray; 
+  font-family: sans-serif; 
+  font-size: 11px; 
+}
+
+div, table {
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+  padding-top: 20px; 
+  padding-bottom: 20px; 
+}
+
+.formdiv {
+    background-color: lightgray;
+}
+
+header, footer {
+  background-color: darkgray; 
+  color: #fff; 
+  padding: 20px 10px;
+}
+
+nav ul {
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+}
+
+a, a:active, a:visited {
+  text-decoration: none;
+  color: blueviolet;
+}
+
+h1, h2, h3, h4 {
+  color: black; 
+}
+
+h1 {
+  font-size: 2.5rem; 
+}
+
+h2 {
+  font-size: 2rem; 
+}
+
+h3 {
+  font-size: 1rem; 
+}
+
+blockquote {
+  background-color: darkgray;
+  font-family: serif;
+  padding: 40px 30px;
+}
+
+.center {
+  text-align: center;
+}
+
+.inline {
+  display: inline-block;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.green {
+  color: #008000; 
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.bold {
+  font-weight: 600;
+}
+
+.fontsize {
+  font-size:2rem
+}
+
+.img {
+  display: block;
+  margin: 0 auto; 
+}
+
+.footer-spacing span {
+  margin-right: 10px; 
+}
+
