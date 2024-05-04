@@ -12,3 +12,34 @@ Some notes from cleaning up the repository
 
 
 6. Code cleanup -- Look for things that shouldn't be there, like commented code blocks, database credentials and API keys, etc. We don't want these in our Git history, because they can be seen by the public.
+
+
+---- 
+
+## Clean up node modules
+
+Looks like we have these directories in Git tracking:
+```
+find . -type d -iname "node_modules"
+./module-5/node-authorization-middlware/node_modules
+./module-5/node-authorization-middlware/node_modules/jsonwebtoken/node_modules
+./module-5/node-authorization-middlware/node_modules/send/node_modules
+./module-5/M5/node_modules
+./module-5/M5/node_modules/mquery/node_modules
+./module-5/M5/node_modules/mongoose/node_modules
+./module-5/M5/node_modules/send/node_modules
+./module-4/node-crash-course/node_modules
+./module-4/node-crash-course/node_modules/filelist/node_modules
+./module-4/node-crash-course/node_modules/send/node_modules
+./module-4/M4/node_modules
+./module-4/M4/node_modules/express/node_modules
+./module-4/M4/node_modules/chalk/node_modules
+./module-4/M4/node_modules/mongoose/node_modules
+./module-4/M4/node_modules/body-parser/node_modules
+./module-4/M4/node_modules/filelist/node_modules
+./module-4/M4/node_modules/send/node_modules
+./module-4/M4/node_modules/send/node_modules/debug/node_modules
+./module-4/M4/node_modules/finalhandler/node_modules
+```
+
+Delete these using `git rm --cached path/to/dir`
