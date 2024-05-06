@@ -1,0 +1,41 @@
+.blog {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.blog h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.blog ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.blog li {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 20px;
+}
+
+.blog h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.blog p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.blog a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.blog a:hover {
+    text-decoration: underline;
+}
