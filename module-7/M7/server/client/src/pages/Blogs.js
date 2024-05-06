@@ -29,19 +29,16 @@ function Blogs() {
 
     const handleDelete = (id) => {
         console.log('Delete blog with id:', id);
-        const confirmDelete = window.confirm('Are you sure you want to delete this blog post?');
-        if (confirmDelete) {
-            // Optimistically update the UI to reflect deletion
-            setBlogs(prevBlogs => prevBlogs.filter(blog => blog._id !== id));
-            // Send delete request to the backend
-            axios.delete(`/api/blogs/${id}`)
-                .then(() => {
-                    console.log('Blog post deleted successfully:', id);
-                })
-                .catch(error => {
-                    console.error('Error deleting blog post:', error);
-                });
-        }
+        setBlogs(prevBlogs => prevBlogs.filter(blog => blog._id !== id));
+        // Send delete request to the backend
+        axios.delete(`/api/blogs/${id}`)
+            .then(() => {
+                console.log('Blog post deleted successfully:', id);
+            })
+            .catch(error => {
+                console.error('Error deleting blog post:', error);
+            });
+        
     };
 
     return (

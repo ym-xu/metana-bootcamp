@@ -68,12 +68,7 @@ const UpdateBlogById = async (req, res) => {
 const DeleteBlogById = async (req, res) => {
     console.log(req.params.id);
     try {
-        const blog = await Blog.findById(req.params.id);
-        if (!blog) {
-            return res.status(404).json({ message: 'Blog not found' });
-        }
-
-        await axios.delete(`/api/blogs/${req.params.id}`);
+        await Blog.findByIdAndDelete(req.params.id);
 
         res.json({ message: 'Blog deleted successfully' });
     } catch (error) {
