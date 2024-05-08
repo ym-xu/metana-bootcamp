@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './../styles/EditBlog.css';
 
 function Create() {
     const [title, setTitle] = useState('');
@@ -20,28 +21,30 @@ function Create() {
     return (
         <div>
             <h2>Create a New Blog Post</h2>
+            <div className="edit-form">
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="content">Content:</label>
-                    <textarea
-                        id="content"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Create Blog</button>
+                    <div>
+                        <label htmlFor="title">Title:</label>
+                        <input
+                            type="text"
+                            id="title"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="content">Content:</label>
+                        <textarea
+                            id="content"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Create Blog</button>      
             </form>
+            </div>
         </div>
     );
 }

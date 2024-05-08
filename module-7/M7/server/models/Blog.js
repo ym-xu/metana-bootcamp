@@ -1,22 +1,41 @@
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
+import { DataTypes } from "sequelize";
+import sequelize from '../config/db.js';
 
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 
-const blogSchema = new Schema({
+const Blog = sequelize.define('Blog', {
+    id: {   
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
     title: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false
     },
     content: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-      }
-});
+}, {tableName:'blogs'});
+Blog.sync({ alter: true });
 
-const Blog = mongoose.model('Blog', blogSchema);
+// const blogSchema = new Schema({
+//     title: {
+//         type: String,
+//         required: true
+//     },
+//     content: {
+//         type: String,
+//         required: true
+//     },
+//     createdAt: {
+//         type: Date,
+//         default: Date.now
+//       }
+// });
+
+// const Blog = mongoose.model('Blog', blogSchema);
 
 export default Blog;

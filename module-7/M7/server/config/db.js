@@ -1,16 +1,7 @@
 import mongoose from 'mongoose';
+import { Sequelize } from 'sequelize';
 
-const connectDB = async () => {
-    try {
-        const conn = await mongoose.connect('mongodb+srv://yimingxu96:UC0tdVisA3LkRhml@m4.sdxiz04.mongodb.net/m7-assignment?retryWrites=true&w=majority&appName=M4', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
-        console.log(`MongoDB connected: ${conn.connection.host}`);
-    } catch (error) {
-        console.error(`Error connecting to MongoDB: ${error.message}`);
-        process.exit(1);
-    }
-};
+const sequelize = new Sequelize('postgres://db_user:135256@localhost:5432/portfolio' , {dialect: 'postgres', logging: false});
 
-export default connectDB;
+
+export default sequelize;
