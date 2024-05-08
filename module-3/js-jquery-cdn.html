@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using jQuery from CDN</title>
+    <!-- Import jQuery from CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <h3 id="demo">Old Content</h3>
+
+    <script>
+        // Replace text contents of the demo element using jQuery
+        $(document).ready(function(){
+            $('#demo').text('New Content');
+        });
+    </script>
+</body>
+</html>
