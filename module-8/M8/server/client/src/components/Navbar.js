@@ -7,6 +7,7 @@ function Navbar() {
             <Link to="/" className="text-xl font-semibold no-underline hover:text-gray-300">Yiming</Link>
             <div className="flex items-center">
                 <Link to="/" className="mx-4 text-white no-underline hover:text-gray-300">Home</Link>
+                <Link to="/blogs" className="mx-4 text-white no-underline hover:text-gray-300">Blogs</Link>
                 <Link to="/create" className="mx-4 text-white no-underline hover:text-gray-300">Create</Link>
                 <Link to="/login" className="mx-4 text-white no-underline hover:text-gray-300">Login</Link>
             </div>

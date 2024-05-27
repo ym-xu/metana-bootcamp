@@ -19,7 +19,7 @@ function App() {
                 <div className="container mx-auto px-4">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/blogs" element={<Home />} />
+                        <Route path="/blogs" element={<Blogs />} />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/create" element={<Create />} />

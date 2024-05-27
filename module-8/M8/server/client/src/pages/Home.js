@@ -1,136 +1,101 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Footer from '../components/Footer';
-import './../styles/Blogs.css';
-import './../styles/EditBlog.css';
-import { useNavigate, Link } from 'react-router-dom';
+import React from "react";
+import Footer from "../components/Footer";
+import profileImage from './../maomao.jpg';
 
 function Home() {
-    const [blogs, setBlogs] = useState([]);
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Assume this state tracks user's login status
-    const [editForms, setEditForms] = useState({});
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // Fetch all blog posts from the backend API
-        axios.get('/api/blogs')
-            .then(response => {
-                setBlogs(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching blogs:', error);
-            });
-
-        // Check user's login status from local storage or authentication context
-        const userLoggedIn = localStorage.getItem('isLoggedIn'); // Example: Read from local storage
-        setIsLoggedIn(userLoggedIn === 'true');
-    }, []);
-
-    const handleEdit = (id) => {
-        setEditForms(prevEditForms => ({
-            ...prevEditForms,
-            [id]: true
-        }));
-    };
-
-    const handleCancelEdit = (id) => {
-        setEditForms(prevEditForms => ({
-            ...prevEditForms,
-            [id]: false
-        }));
-    };
-
-    const handleSaveEdit = async (id, newTitle, newContent) => {
-        // Get the new title and content from the input fields
-        const title = document.querySelector('.edit-form input').value;
-        const content = document.querySelector('.edit-form textarea').value;
-
-        // Update the blog post in the frontend
-        setBlogs(prevBlogs => prevBlogs.map(blog => {
-            if (blog.id === id) {
-                return {
-                    ...blog,
-                    title,
-                    content
-                };
-            }
-            return blog;
-        }));
-
-        // Send the updated blog post to the backend
-        await axios.put(`/api/blogs/${id}`, { title, content })
-            .then(() => {
-                console.log('Blog post updated successfully:', id);
-                setEditForms(prevEditForms => ({
-                    ...prevEditForms,
-                    [id]: false
-                }));
-            })
-            .catch(error => {
-                console.error('Error updating blog post:', error);
-            });
-    }
-
-
-    const handleDelete = (id) => {
-        console.log('Delete blog with id:', id);
-        setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== id));
-        // Send delete request to the backend
-        axios.delete(`/api/blogs/${id}`)
-            .then(() => {
-                console.log('Blog post deleted successfully:', id);
-            })
-            .catch(error => {
-                console.error('Error deleting blog post:', error);
-            });
-        
+    const profile = {
+        name: "Yiming",
+        role: "Data & AI Engineer",
+        bio: "new graduate of computer science with two years of AI research experience, with strong interest in LLM and Gen-AI, especially cross-modal/multi-modal retrieval/question answering/generation",
     };
 
     return (
-        <div className="container mx-auto pt-20 pb-24 px-4"> {/* Adjusted padding for top and bottom */}
-            {blogs.length > 0 && (
-                <div className="mb-8">
-                    <div className="bg-white shadow overflow-hidden rounded-lg p-6 flex flex-col md:flex-row">
-                        <Link to={`/blog/${blogs[0].id}`} className="md:w-1/2">
-                            <img src={`https://via.placeholder.com/600x400?text=Blog+Image+for+${blogs[0].title}`} alt="Featured Blog Post" className="h-auto rounded"/>
-                        </Link>
-                        <div className="mt-4 md:mt-0 md:ml-4 md:w-1/2">
-                            <div>
-                                <Link to={`/blog/${blogs[0].id}`} className="text-2xl font-bold hover:text-blue-500">{blogs[0].title}</Link>
-                                <p className="text-gray-700">{blogs[0].content}</p>
-                            </div>
-                            {isLoggedIn && (
-                                <div className="flex justify-end space-x-2 mt-2">
-                                    <button onClick={() => navigate(`/edit/${blogs[0].id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">Edit</button>
-                                    <button onClick={() => handleDelete(blogs[0].id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">Delete</button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+        <div className="constainer mx-auto px-4 py-8">
+
+            <section className="mt-6 bg-white rounded-lg shadow p-6 flex flex-col md:flex-row">
+                <div className="md:ml-4">
+                    <h2 className="text-2xl font-bold">{profile.name}</h2>
+                    <p>{profile.bio}</p>
                 </div>
-            )}
-    
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {blogs.slice(1).map(blog => (
-                    <li key={blog.id} className="bg-white shadow overflow-hidden rounded-lg p-4">
-                        <Link to={`/blog/${blog.id}`} className="block hover:text-blue-500">
-                            <img src={`https://via.placeholder.com/150x150?text=${blog.title}`} alt="Blog Post" className="w-full h-auto rounded mb-2"/>
-                            <h3 className="text-lg font-bold">{blog.title}</h3>
-                            <p className="text-sm text-gray-700">{blog.content}</p>
-                        </Link>
-                        {isLoggedIn && (
-                            <div className="flex justify-end space-x-2 mt-2">
-                                <button onClick={() => navigate(`/edit/${blog.id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded" >Edit</button>
-                                <button onClick={() => handleDelete(blog.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Delete</button>
-                            </div>
-                        )}
-                    </li>
-                ))}
-            </ul>
+                <img src={profileImage} alt={profile.name} className="w-full md:w-1/8 lg:w-1/12 h-auto rounded"/>
+            </section>
+            <Experience />
+            <Education />
+            <Publications />
+
             <Footer />
         </div>
-    );    
-    
+    );
 }
 
+function Education() {
+    return (
+        <section className="mt-6 bg-white rounded-lg shadow p-6 flex flex-col md:flex-row">
+            <div className="container mx-auto px-4 py-1">
+                <h2 className="text-2xl font-bold">Education</h2>
+                <ul>
+                    <li>
+                        <h3 className="text-lg font-bold">University of Amsterdam</h3>
+                        <p>Master of Science in Computer Science</p>
+                        <p>2021 - 2023</p>
+                    </li>
+                    <li>
+                        <h3 className="text-lg font-bold">Henan University</h3>
+                        <p>Bachelor of Science in Computer Science</p>
+                        <p>2015 - 2019</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    );
+}
+
+function Publications() {
+    return (
+        <section className="mt-6 bg-white rounded-lg shadow p-6 flex flex-col md:flex-row">
+            <div className="container mx-auto px-4 py-1">
+                <h2 className="text-2xl font-bold">Publications</h2>
+                <ul>
+                    <li>
+                        <h3 className="text-l font-bold">Retrieval-based Question Answering with Passage Expansion using a Knowledge Graph.</h3>
+                        <p>Benno Kruit, Yiming Xu*, Jan-Christoph Kalo,</p>
+                        <p> LREC-COLING 2024.</p>
+                    </li>
+                    <li>
+                        <h3 className="text-l font-bold">Multihead Attention-Based Audio Image Generation with Cross-Modal Shared Weight Classifier.</h3>
+                        <p>Yiming Xu</p>
+                        <p> IJCNN 2023</p>
+                    </li>
+                    <li>
+                        <h3 className="text-l font-bold">Fine-Grained Label Learning via Siamese Network for Cross-modal Information Retrieval.</h3>
+                        <p>Yiming Xu, Jing Yu, Yue Hu, Jingjing Guo, Jianlong Tan</p>
+                        <p> ICCS 2019</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    );
+}   
+
+function Experience() {
+    return (
+        <section className="mt-6 bg-white rounded-lg shadow p-6 flex flex-col md:flex-row">
+            <div className="container mx-auto px-4 py-1">
+                <h2 className="text-2xl font-bold">Experience</h2>
+                <ul>
+                    <li>
+                        <h3 className="text-lg font-bold">Data & AI Engineer</h3>
+                        <p>Amsterdam & Shanghai</p>
+                        <p>2023 - Present</p>
+                    </li>
+                    <li>
+                        <h3 className="text-lg font-bold">Research Assistance</h3>
+                        <p>Beijing, China</p>
+                        <p>2019 - 2020</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    );
+}
 export default Home;
