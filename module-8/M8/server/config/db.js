@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 import { Sequelize } from 'sequelize';
+import dotenv from 'dotenv';
+dotenv.config()
 
-const sequelize = new Sequelize('postgres://db_user:135256@localhost:5432/portfolio' , {dialect: 'postgres', logging: false});
+console.log(process.env.db_user, process.env.db_psword, process.env.db_host, process.env.db_port, process.env.db_name);
 
+const sequelize = new Sequelize(`postgres://${process.env.db_user}:${process.env.db_psword}@${process.env.db_host}:${process.env.db_port}/${process.env.db_name}` , {dialect: 'postgres', logging: false});
 
 export default sequelize;
