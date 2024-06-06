@@ -3,8 +3,8 @@
 
 ## Design
 
-![design](image.png)
+![design](https://github.com/ym-xu/metana-bootcamp/blob/unit-8/module-8/imgs/image.png)
 
 ## Website
 
-![website](image-1.png)
+![website](https://github.com/ym-xu/metana-bootcamp/blob/unit-8/module-8/imgs/image-1.png)
