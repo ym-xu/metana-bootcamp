@@ -4,11 +4,13 @@ import fs from 'fs';
 import express from 'express';
 import mongoose from 'mongoose';
 import blogsRouter from "./routes/blogsRouter.js";
-
+import dotenv from 'dotenv';
+dotenv.config()
 
 const app = express();
 
-const dbURI = 'mongodb+srv://yimingxu96:UC0tdVisA3LkRhml@m4.sdxiz04.mongodb.net/m4-assignment?retryWrites=true&w=majority&appName=M4'
+const dbURI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@m4.sdxiz04.mongodb.net/m4-assignment?retryWrites=true&w=majority&appName=M4`
+
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => console.log('connected to db'))
     .catch((err) => console.log(err));
@@ -26,6 +28,3 @@ app.use((req, res, next) => {
 app.listen(3000, 'localhost', () =>{
     console.log('listening for requests on port 3000');
 });
-
-// UC0tdVisA3LkRhml  yimingxu96
-// mongodb+srv://yimingxu96:UC0tdVisA3LkRhml@m4.sdxiz04.mongodb.net/

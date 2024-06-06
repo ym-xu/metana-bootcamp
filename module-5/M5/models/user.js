@@ -26,22 +26,4 @@ const User = sequelize.define('User', {
 }, {tableName:'user_m5', createdAt: false, updatedAt: false});
 User.sync({ alter: true });
 
-// const userSchema = new Schema({
-//   name: {
-//     type: String,
-//     required: true
-//   },
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true
-//   },
-//   role: {
-//     type: String,
-//     default: ''
-//   }
-// });
-
-// const User = mongoose.model('User', userSchema);
-
 export default User;
