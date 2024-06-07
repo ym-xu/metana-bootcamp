@@ -1,8 +1,5 @@
-// import mongoose from "mongoose";
 import { DataTypes } from "sequelize";
 import sequelize from '../config/db.js';
-
-// const Schema = mongoose.Schema;
 
 const User = sequelize.define('User', {
     id: {   
@@ -26,22 +23,5 @@ const User = sequelize.define('User', {
 }, {tableName:'users'});
 User.sync({ alter: true });
 
-// const userSchema = new Schema({
-//   name: {
-//     type: String,
-//     required: true
-//   },
-//   email: {
-//     type: String,
-//     required: true,
-//     unique: true
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   }
-// });
-
-// const User = mongoose.model('User', userSchema);
 
 export default User;

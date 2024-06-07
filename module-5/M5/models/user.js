@@ -1,6 +1,3 @@
-// import mongoose from 'mongoose';
-// const Schema = mongoose.Schema;
-
 import { DataTypes } from "sequelize";
 import sequelize from "../config/db.js";
 
