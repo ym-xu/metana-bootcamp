@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
 
         console.log('token in login:', token);
 
-        res.cookie('jwt', token, { httpOnly: true, secure: false, sameSite: 'None', maxAge: 3600000}).json({ token });
+        res.cookie('jwt', token, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 3600000}).json({ token });
 
     } catch (error) {   
         console.error(error);
@@ -70,8 +70,8 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-    res.json({ message: 'Logout successful' });
-    res.status(200);
+    res.cookie('jwt', '', { expires: new Date(0) });
+    res.status(200).json({ message: 'User logged out successfully' });
 });
 
 export default router;
