@@ -22,7 +22,9 @@ const ProtectedRoute = ({ children, requiredRole }) => {
     return <Navigate to="/blogs" state={{ from: location }} replace />;
   }
 
-  return children;  // If authenticated and role matches, render the children components
+  return children;
 };
+
+
 
 export default ProtectedRoute;

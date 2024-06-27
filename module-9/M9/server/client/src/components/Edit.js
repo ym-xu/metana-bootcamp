@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
 function EditBlog() {
-    const { id } = useParams(); // Get the blog ID from the URL parameters
+    const { id } = useParams();
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -28,14 +28,14 @@ function EditBlog() {
         e.preventDefault();
         try {
             await axios.put(`/api/blogs/${id}`, { title, content });
-            navigate(`/blog/${id}`); // Redirect to the blog detail page
+            navigate(`/blog/${id}`);
         } catch (error) {
             console.error('Error updating blog post:', error);
         }
     };
 
     const handleCancel = () => {
-        navigate(-1); // Go back to the previous page
+        navigate(-1);
     };
 
     if (loading) return <div>Loading...</div>;

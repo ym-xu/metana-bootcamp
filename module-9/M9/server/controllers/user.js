@@ -1,11 +1,9 @@
-import express from 'express';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
-const router = express.Router();
 
-router.post('/register', async (req, res) => {
+const register = async (req, res) => {
     try {
         const { name, email, password } = req.body;
         
@@ -29,9 +27,9 @@ router.post('/register', async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
     }
-});
+};
 
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -67,13 +65,60 @@ router.post('/login', async (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });
     }
-});
+};
 
-router.post('/logout', (req, res) => {
+const logout = async (req, res) => {
     res.cookie('jwt', '', { expires: new Date(0) });
     res.status(200).json({ message: 'User logged out successfully' });
-});
+};
 
-export default router;
+const updateprofile = async (req, res) => {
+    console.log('updateProfile');
+    const { userId, username, email, first_name, last_name, description } = req.body;
+    console.log(userId, username, email);
+    try {
+        const user = await User.findOne({
+            where: { id: userId }
+        });
 
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
 
+        const updatedUser = await user.update({
+            username: username,
+            email: email,
+            first_name: first_name,
+            last_name: last_name,
+            description: description
+        });
+
+        res.json({ message: 'User updated successfully', user: updatedUser });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+const getprofile = async (req, res) => {
+    console.log('get profile');
+    try {
+        const email = req.user.email;
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json({ username: user.username, email: user.email, first_name: user.first_name, last_name: user.last_name, description: user.description, id: user.id});
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+export default {
+    register,
+    login,
+    logout,
+    updateprofile,
+    getprofile,
+};

@@ -3,11 +3,13 @@ import axios from 'axios';
 import Footer from '../components/Footer';
 import './../styles/Blogs.css';
 import './../styles/EditBlog.css';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
-function Blogs() {
+function Dashboard({ isAdmin }) {
     const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate();
 
+    console.log('isAdmin:', isAdmin);
     useEffect(() => {
         axios.get('/api/blogs')
             .then(response => {
@@ -18,6 +20,17 @@ function Blogs() {
             });
     }, []);
 
+    const handleDelete = (id) => {
+        console.log('Delete blog with id:', id);
+        setBlogs(prevBlogs => prevBlogs.filter(blog => blog.id !== id));
+        axios.delete(`/api/blogs/${id}`)
+            .then(() => {
+                console.log('Blog post deleted successfully:', id);
+            })
+            .catch(error => {
+                console.error('Error deleting blog post:', error);
+            });
+    };
 
     return (
         <div className="container mx-auto pt-20 pb-24 px-4">
@@ -32,6 +45,12 @@ function Blogs() {
                                 <Link to={`/blog/${blogs[0].id}`} className="text-2xl font-bold hover:text-blue-500">{blogs[0].title}</Link>
                                 <p className="text-gray-700">{blogs[0].content}</p>
                             </div>
+                            { isAdmin && (
+                                <div className="flex justify-end space-x-2 mt-2">
+                                    <button onClick={() => navigate(`/edit/${blogs[0].id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">Edit</button>
+                                    <button onClick={() => handleDelete(blogs[0].id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-4 rounded">Delete</button>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -45,6 +64,12 @@ function Blogs() {
                             <h3 className="text-lg font-bold">{blog.title}</h3>
                             <p className="text-sm text-gray-700">{blog.content}</p>
                         </Link>
+                        { isAdmin && (
+                            <div className="flex justify-end space-x-2 mt-2">
+                                <button onClick={() => navigate(`/edit/${blog.id}`)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">Edit</button>
+                                <button onClick={() => handleDelete(blog.id)} className="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded">Delete</button>
+                            </div>
+                        )}
                     </li>
                 ))}
             </ul>
@@ -53,4 +78,4 @@ function Blogs() {
     );
 }
 
-export default Blogs;
+export default Dashboard;

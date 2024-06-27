@@ -13,12 +13,10 @@ function Create() {
         e.preventDefault();
         try {
             const formData = new FormData();
-            // Send a POST request to the backend to create a new blog post
             await axios.post('/api/blogs', { title, content });
             if (image) {
                 formData.append('image', image);
             }
-            // Redirect the user to the blogs page after creating the post
             window.location.href = '/blogs';
         } catch (error) {
             console.error('Error creating blog post:', error);
@@ -30,7 +28,7 @@ function Create() {
     };
 
     const handleCancel = () => {
-        navigate('/blogs'); // Redirects the user to the blogs page
+        navigate('/blogs');
     };
 
     return (

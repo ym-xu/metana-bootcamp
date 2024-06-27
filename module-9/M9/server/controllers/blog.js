@@ -1,5 +1,4 @@
 import Blog from "../models/Blog.js";
-import axios from 'axios';
 
 const CreateBlog = async (req, res) => {
     try {
@@ -9,8 +8,7 @@ const CreateBlog = async (req, res) => {
         title,
         content,
         });
-    
-        // await newBlog.save();
+
         console.log(newBlog._id);
         res.status(201).json(newBlog);
     } catch (error) {

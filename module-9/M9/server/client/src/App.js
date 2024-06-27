@@ -11,29 +11,44 @@ import Register from './pages/Register';
 import Navbar from './components/Navbar';
 import BlogDetail from './pages/BlogDetail';
 import EditBlog from './components/Edit';
-import { jwtDecode } from 'jwt-decode';
+import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard'
+import axios from 'axios';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         setIsAuthenticated(isLoggedIn);
     }, []);
 
-    const isAdmin = () => {
+    useEffect(() => {
+        const fetchAdminStatus = async () => {
         const token = localStorage.getItem('token');
-        if (!token) {
-            return false;
+        if (token) {
+            try {
+            const response = await axios.get('/api/auth/admin', {
+                headers: {
+                Authorization: `Bearer ${token}`
+                }
+            });
+            console.log("response.data.isAdmin:", response.data.user.role);
+            setIsAdmin(response.data.user.role == 'admin');
+            console.log("isAdmin ... :", isAuthenticated, isAdmin);
+            } catch (error) { 
+            console.error("Error fetching admin status:", error);
+            setIsAdmin(false);
+            }
+        } else {
+            setIsAdmin(false);
         }
-        try{
-            const decoded = jwtDecode(token);
-            return decoded.role === 'admin';
-        } catch (error) {
-            console.error('Error decoding token:', error);
-            return false;
-        }   
-    };
+        };
+    
+        fetchAdminStatus();
+    }, [isAuthenticated]);
+
 
     return (
         <Router>
@@ -42,7 +57,13 @@ function App() {
                 <div className="container mx-auto px-4">
                     <Routes>
                         <Route path="/" element={<Home />} />
-                        <Route path="/blogs" element={<Blogs setIsAuthenticated = {setIsAuthenticated} isAdmin={isAdmin()} />} />
+                        {/* <Route path="/blogs" element={<Blogs setIsAuthenticated = {setIsAuthenticated}  />} /> */}
+                        <Route path="/blogs" 
+                            element={isAdmin
+                                ? <Dashboard setIsAuthenticated={setIsAuthenticated} isAdmin = {isAdmin}/>
+                                : <Blogs setIsAuthenticated = {setIsAuthenticated} />
+                            }
+                        />
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/create" 
@@ -55,6 +76,7 @@ function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/blog/:id" element={<BlogDetail />} />
                         <Route path="/edit/:id" element={<EditBlog />} />
+                        <Route path="/profile" element={<Profile />} />
                     </Routes>
                 </div>
             </div>

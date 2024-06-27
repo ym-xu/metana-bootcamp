@@ -11,7 +11,6 @@ function Login( {setIsAuthenticated} ) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // Send a POST request to the backend to authenticate the user
             const response = await axios.post('/api/auth/login', { email, password });
             const token = response.data.token;
             localStorage.setItem('token', token);

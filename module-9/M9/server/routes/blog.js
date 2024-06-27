@@ -1,5 +1,5 @@
 import express from "express";
-import blogController from "../controllers/blogController.js";
+import blogController from "../controllers/blog.js";
 import { isAdmin, isLoggedIn } from "../middleware/authmiddleware.js";
 
 const router = express.Router();

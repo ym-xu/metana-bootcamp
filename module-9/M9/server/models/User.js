@@ -7,7 +7,7 @@ const User = sequelize.define('User', {
         autoIncrement: true,
         primaryKey: true
     },
-    name: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -24,6 +24,18 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: 'user'
+    },
+    first_name: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    last_name: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
     }
 }, {tableName:'users'});
 User.sync({ alter: true });
