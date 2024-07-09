@@ -23,10 +23,7 @@ describe('Authentication Functions', () => {
             bcrypt.compare = jest.fn().mockResolvedValue(true);
             jwt.sign = jest.fn().mockReturnValue('your-secret-key');
 
-            console.log("mockUser ... :", mockUser);
-
             const user = await User.findOne({ where: { email: 'test@example.com' } });
-            console.log("get user ... :");
 
             expect(user).toEqual(mockUser);
 
@@ -38,13 +35,11 @@ describe('Authentication Functions', () => {
         it('should invalidate the JWT token', () => {
             const req = {};
             const res = {
-                cookie: jest.fn(),
+                cookie: jest.fn().mockReturnThis(),
                 status: jest.fn().mockReturnThis(),
                 json: jest.fn()
             };
-            console.log("res ... :", res);
             logout(req, res);
-            console.log("finish ... :");
             expect(res.cookie).toHaveBeenCalledWith('jwt', '', { expires: new Date(0) });
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({ message: 'User logged out successfully' });

@@ -115,7 +115,7 @@ const getprofile = async (req, res) => {
     }
 };
 
-export default {
+export {
     register,
     login,
     logout,
