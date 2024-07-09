@@ -46,3 +46,80 @@ describe('Authentication Functions', () => {
         });
     });
 });
+
+// import { login, logout, validateToken } from '../server/controllers/user';
+// import User from '../server/models/User';
+// import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
+
+// jest.mock('../server/models/User');
+// jest.mock('bcrypt');
+// jest.mock('jsonwebtoken');
+
+// describe('login', () => {
+//     let req, res;
+
+//     beforeEach(() => {
+//         req = {
+//             body: {
+//                 email: 'test@example.com',
+//                 password: 'password123'
+//             }
+//         };
+
+//         res = {
+//             status: jest.fn().mockReturnThis(),
+//             json: jest.fn(),
+//             cookie: jest.fn().mockReturnThis(),
+//         };
+//     });
+
+//     it('should return 400 if user is not found', async () => {
+//         User.findOne.mockResolvedValue(null);
+
+//         await login(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(400);
+//         expect(res.json).toHaveBeenCalledWith({ message: 'Invalid credentials' });
+//     });
+
+//     it('should return 400 if password does not match', async () => {
+//         User.findOne.mockResolvedValue({ password: 'hashedpassword' });
+//         bcrypt.compare.mockResolvedValue(false);
+
+//         await login(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(400);
+//         expect(res.json).toHaveBeenCalledWith({ message: 'Invalid credentials' });
+//     });
+
+//     it('should return token if credentials are valid', async () => {
+//         const user = { id: 1, email: 'test@example.com', role: 'user', name: 'Test User', password: 'hashedpassword' };
+//         const token = 'fake-jwt-token';
+
+//         User.findOne.mockResolvedValue(user);
+//         bcrypt.compare.mockResolvedValue(true);
+//         jwt.sign.mockReturnValue(token);
+
+//         await login(req, res);
+
+//         expect(jwt.sign).toHaveBeenCalledWith(
+//             { userId: user.id, email: user.email, role: user.role, name: user.name },
+//             'your-secret-key',
+//             { expiresIn: '1h' }
+//         );
+
+//         expect(res.cookie).toHaveBeenCalledWith('jwt', token, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 3600000 });
+//         expect(res.json).toHaveBeenCalledWith({ token });
+//     });
+
+//     it('should handle server errors', async () => {
+//         const error = new Error('Server error');
+//         User.findOne.mockRejectedValue(error);
+
+//         await login(req, res);
+
+//         expect(res.status).toHaveBeenCalledWith(500);
+//         expect(res.json).toHaveBeenCalledWith({ message: 'Server Error' });
+//     });
+// });
