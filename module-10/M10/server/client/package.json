@@ -16,8 +16,13 @@
   "scripts": {
     "start": "react-scripts start --port 3001",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "jest --config jest.config.js"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "testEnvironment": "jsdom"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
@@ -39,7 +44,13 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.3"
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
+    "@babel/preset-react": "^7.14.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "jest-environment-jsdom": "^27.0.6"
   }
 }
-

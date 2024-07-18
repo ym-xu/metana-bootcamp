@@ -5,26 +5,28 @@ import bcrypt from 'bcrypt';
 
 const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
-        
-        console.log(name, email, password);
+        const { username, email, password } = req.body;
+
+        console.log('Request body:', req.body);
         let user = await User.findOne({ where: { email } });
 
         if (user) {
+            console.log('User already exists');
             return res.status(400).json({ message: 'User already exists' });
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
         user = await User.create({
-            name,
+            username,
             email,
             password: hashedPassword
         });
 
+        console.log('User created:', user);
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
-        console.error(error);
+        console.error('Error in register:', error);
         res.status(500).json({ message: 'Server Error' });
     }
 };

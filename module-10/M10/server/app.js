@@ -24,7 +24,8 @@ const checkDbStatus = async () => {
 
 checkDbStatus();
 
-app.listen(3001, 'localhost', () =>{
-    console.log('listening for requests on port 3001');
-});
+// app.listen(3001, 'localhost', () =>{
+//     console.log('listening for requests on port 3001');
+// });
 
+export default app;
