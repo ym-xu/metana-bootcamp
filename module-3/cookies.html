@@ -1,0 +1,61 @@
+<!-- Set a cookie with an expiration date. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<script>
+function setCookie(name, value, day) {
+    const date = new Date();
+    date.setTime(date.getTime() + (day * 24 * 60 * 60 * 1000));
+    let expires = " expires=" + date.toUTCString();
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+    console.log(document.cookie)
+}
+
+function setCookie_InputValue() {
+    var inputValue = document.getElementById("InputCookie").value;
+    setCookie("customCookie", inputValue, 7); 
+}
+
+function get_cookie(){
+    const doc_cookie = document.cookie;
+    const cArray = doc_cookie.split(", ");
+    let result = null;
+
+    cArray.forEach(element => {
+        if (element.indexOf(name) == 0){
+            result = element.substring(name.length + 1)
+        }
+    })
+    return result;
+}
+
+function displayCookieValue() {
+    var cookieValue = get_cookie("customCookie");
+    if (cookieValue) {
+        console.log(cookieValue);
+    } else {
+        console.log("no cookie");
+    }
+}
+
+function clearCookie(name) {
+    setCookie(name, null, null)
+}
+
+setCookie("fn", "sb", 365)
+console.log(document.cookie)
+console.log(get_cookie("fn"))
+displayCookieValue()
+
+</script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

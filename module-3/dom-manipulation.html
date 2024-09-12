@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation</title>
+</head>
+<body>
+    <h2 id="heading">Hello World</h2>
+    <p class="content">This is a paragraph.</p>
+    <div id="container">
+        <p>This is another paragraph inside a div.</p>
+    </div>
+
+    <div id="parent">
+        <p>first element.</p>
+        <p>second element.</p>
+    </div>
+
+    <p id="targetElement">change my color</p>
+    <button onclick="changeTextColor()">Change Text Color</button>
+
+    <div id="parenttoaddp">
+        <p>This is a paragraph.</p>
+    </div>
+    <button onclick="addChildElement()">Add Child Element</button>
+    <button onclick="addSiblingElement()">Add Sibling Element</button>
+
+    <form id="myForm">
+        <label for="textInput">Enter your name:</label>
+        <input type="text" id="textInput" name="nameInput">
+        <button type="button" onclick="displayInput()">Submit</button>
+    </form>
+
+    <div id="display"></div>
+
+    <script>
+        // Function to select element by ID and log its content
+        function getElementByIdAndLog(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                console.log(`Content of element with ID "${id}":`, element.textContent);
+            } else {
+                console.log(`Element with ID "${id}" not found.`);
+            }
+        }
+
+        // Function to select element by query selector and log its content
+        function querySelectorAndLog(selector) {
+            const element = document.querySelector(selector);
+            if (element) {
+                console.log(`Content of element with selector "${selector}":`, element.textContent);
+            } else {
+                console.log(`Element with selector "${selector}" not found.`);
+            }
+        }
+
+        // Call functions to select elements and log their content
+        getElementByIdAndLog('heading');
+        querySelectorAndLog('.content');
+        querySelectorAndLog('#container p');
+
+        function getFirstChild(parentID){
+            const parent = document.getElementById(parentID);
+            if (parent && parent.firstChild){
+                return parent.firstElementChild.textContent;
+            }
+            else{
+                return "No first child"
+            }
+        }
+
+        function getFirstSibling(targetSelector){
+            const targetElement = document.querySelector(targetSelector);
+            if (targetElement && targetElement.nextElementSibling) {
+                return targetElement.nextElementSibling.textContent;
+            } else {
+                return "No sibling found";
+            }
+        }
+
+
+        console.log("First child of #parent:", getFirstChild('parent'));
+        console.log("First sibling of p:", getFirstSibling('#parent p'));
+
+        function changeTextColor(){
+            var targetElement = document.getElementById("targetElement");
+            if (targetElement) {
+                targetElement.style.color = "yellow";
+            } else {
+                console.log("Target element not found.");
+            }
+        }
+
+        function addChildElement(){
+            const parentDiv = document.getElementById("parenttoaddp");
+            if (parentDiv) {
+                const newChildElement = document.createElement("div");
+                newChildElement.textContent = "This is a new child element";
+                parentDiv.appendChild(newChildElement);
+            } else {
+                console.log("Parent div not found.");
+            }
+        }
+
+        function addSiblingElement() {
+            const paragraphElement = document.querySelector("#parenttoaddp p");
+            if (paragraphElement) {
+                const newSiblingElement = document.createElement("div");
+                newSiblingElement.textContent = "This is a new sibling element";
+                paragraphElement.parentNode.insertBefore(newSiblingElement, paragraphElement);
+            } else {
+                console.log("Paragraph element not found.");
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById("textInput").value = "input your name";
+        };
+
+        function displayInput() {
+            // Get the input value
+            var userInput = document.getElementById("textInput").value;
+            // Display the input on the webpage
+            if (userInput == "input your name") {
+                document.getElementById("display").textContent = "Input your name please!"
+            }
+            else{
+                document.getElementById("display").textContent = "You name: " + userInput;
+            } 
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logging Form Data</title>
+</head>
+<body>
+    <!-- Form to capture user input -->
+    <form id="myForm">
+        <label for="nameInput">Enter your name:</label>
+        <input type="text" id="nameInput" name="name">
+        <br>
+        <br>
+        <label for="ageInput">Enter your age:</label>
+        <input type="age" id="ageInput" name="age">
+        <br>
+        <br>
+        <label for="emailInput">Enter your email:</label>
+        <input type="text" id="emailInput" name="email">
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="errorContainer"></div>
+
+    <script src="./form-handlers.js"></script>
+    <script src="./form-handlers.js"></script>
+
+    <script>
+
+        var form = document.getElementById("myForm");
+
+        form.addEventListener("submit", function(event) {
+            
+            // Prevent the default form submission
+            event.preventDefault();
+
+            var formData = new FormData(form);
+
+            var formObject = {};
+            formData.forEach(function(value, key) {
+                formObject[key] = value;
+            });
+
+            console.log("Form data:", formObject);
+        });
+    </script>
+</body>
+</html>
